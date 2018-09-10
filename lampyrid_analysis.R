@@ -532,9 +532,9 @@ grid.arrange(arrangeGrob(lampyrid.summary.week1, lampyrid.summary.ddacc1, ncol=2
 
 
 #save to pdf
-pdf("figure4.pdf", height=6, width=10)
-grid.arrange(arrangeGrob(lampyrid.summary.week1, lampyrid.summary.ddacc1, ncol=2, widths=c(0.49, 0.55)))
-dev.off()
+#pdf("figure4.pdf", height=6, width=10)
+#grid.arrange(arrangeGrob(lampyrid.summary.week1, lampyrid.summary.ddacc1, ncol=2, widths=c(0.49, 0.55)))
+#dev.off()
 
 
 #we want to look at captures by treatment 
@@ -558,9 +558,9 @@ treatment.boxplot<-ggplot(captures.by.treatment, aes(factor(TREAT_DESC), avg))+
 treatment.boxplot
 
 #save to pdf
-pdf("figure1.pdf", height=6, width=8)
-treatment.boxplot
-dev.off()
+#pdf("figure1.pdf", height=6, width=8)
+#treatment.boxplot
+#dev.off()
 
 #looks to me like we are most likely to capture fireflies in annual herbaceous crops with the least soil disturbance
 #alfalfa, and no till. Hmm.
@@ -581,9 +581,9 @@ lampyrid.summary.treatment<-ggplot(captures.by.treatment, aes(year, avg,
 lampyrid.summary.treatment
 
 #save to pdf
-pdf("figure2.pdf", height=6, width=8)
-lampyrid.summary.treatment
-dev.off()
+#pdf("figure2.pdf", height=6, width=8)
+#lampyrid.summary.treatment
+#dev.off()
 
 #an interesting population cycling pattern emerges, but it doesn't look like there's major changes of crop use
 #At least not at the yearly resolution
@@ -804,7 +804,7 @@ with(env.landscape.week, legend("right", legend = levels(as.factor(year)),
 #dev.off()
 
 #plot two plots together 
-pdf("figure3.pdf", height=8, width=8)
+#pdf("figure3.pdf", height=8, width=8)
 par(mfrow=c(2,1), mar=c(4.1, 4.8, 1.5, 8.1),xpd=TRUE) 
 
 plot(ord.year, disp='sites', type='n')
@@ -821,7 +821,7 @@ with(env.landscape.week, points(ord.week, display = "sites", col = "black", pch 
 plot(fit.week, col="red")
 ordilabel(ord.week, display="species", cex=0.75, col="black")
 text(-2.33,1.1, "B", cex=2)
-dev.off()
+#dev.off()
 
 #finally, let's do some generalized linear modelling to see what's important and if we can explain what's going on
 #we've clearly got a quadratic resonse to degree day accumulation, and since we're dealing with count data, we should model 
@@ -878,9 +878,9 @@ model.plot<-ggplot(model.performance.1, aes(number, value, fill=as.factor(variab
 model.plot
 
 #save to pdf
-pdf("figure5.pdf", height=6, width=8)
-model.plot
-dev.off()
+#pdf("figure5.pdf", height=6, width=8)
+#model.plot
+#dev.off()
 
 
 #Let's see how well the model works when we look at data with a lower resolution 
@@ -961,9 +961,9 @@ peaks.year<-ggplot(peaks, aes(x=as.factor(year), y=peak, fill=as.factor(year)))+
 peaks.year
 
 #save to pdf
-pdf("figure6.pdf", height=6, width=8)
-peaks.year
-dev.off()
+#pdf("figure6.pdf", height=6, width=8)
+#peaks.year
+#dev.off()
 
 #ok, now let's figure out which week each peak occured in
 weeks<-c()
@@ -1007,9 +1007,9 @@ dd.vs.precip<-ggplot(peaks, aes(precip.0, peak))+
 dd.vs.precip  
 
 #save to pdf
-pdf("figure7.pdf", height=6, width=8)
-dd.vs.precip
-dev.off()
+#pdf("figure7.pdf", height=6, width=8)
+#dd.vs.precip
+#dev.off()
 
 
 peaks$precip.02<-peaks$precip.0^2
@@ -1018,21 +1018,3 @@ env.test<-glm(peak~precip.0+precip.02, data=peaks, family="gaussian")
 summary(env.test)
 
 
-#create figure for LTER annual report
-#need lampyrid.summary.ddac as panel A and
-#dd.vs.precip as panel B
-
-#add label to panel A, remove legend
-lampyrid.summary.ddacc2<-lampyrid.summary.ddacc+guides(fill=FALSE)+
-  annotate("text", x=75, y=4.2, label="A", size=12)
-#remove Y axis title from panel B, add label, and remove legend
-dd.vs.precip2<-dd.vs.precip+ylim(650,1000)+
-  annotate("text", x=255, y=987, label="B", size=12)
-#stack it together
-grid.arrange(arrangeGrob(lampyrid.summary.ddacc2, dd.vs.precip2, ncol=2, widths=c(0.45,0.55)))
-
-
-#save to pdf
-#pdf("annualreport2016.pdf", height=5, width=12)
-#grid.arrange(arrangeGrob(lampyrid.summary.ddacc2, dd.vs.precip2, ncol=2, widths=c(0.45,0.55)))
-#dev.off()
