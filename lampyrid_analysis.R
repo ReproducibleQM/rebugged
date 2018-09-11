@@ -1,3 +1,14 @@
+#install needed packages
+
+install.packages("lubridate")
+install.packages("reshape2")
+install.packages("plyr")
+install.packages("ggplot2")
+install.packages("gridExtra")
+install.packages("vegan")
+install.packages("MASS")
+
+
 # lampyrid analysis
 #bring data in from figshare
 lampyrid<-read.csv(file="https://ndownloader.figshare.com/files/3686040",
@@ -17,7 +28,6 @@ start<-60
 #clean data
 #fix dates, make them ISO'ed
 library(lubridate)
-library(ISOweek)
 lampyrid$newdate<-mdy(lampyrid$DATE)
 #extract year
 lampyrid$year<-year(lampyrid$newdate)
